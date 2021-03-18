@@ -25,7 +25,7 @@ app.post("/timer", async (req, res) => {
     res.json(newEntry.rows[0]);
   } catch (err) {
     console.error(err.message);
-  }
+ }
 });
 
 app.get("/timer/:day", async (req, res)=>{
@@ -53,11 +53,12 @@ app.put("/timer/:day", async(req, res)=>{
     }    
 });
 
-app.delete("/timer/:day", async(req, res)=>{
+app.delete("/timer/:id", async(req, res)=>{
     try{
-        const {day} = req.params;
+        const {id} = req.params;
+        console.log(id)
         const deletedData = await pool.query(
-            "DELETE FROM timer WHERE day = $1", [day]
+            "DELETE FROM timer WHERE id = $1", [id]
         );
         res.json("Data was deleted.");
 
