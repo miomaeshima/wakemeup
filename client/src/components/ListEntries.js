@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Button from 'react-bootstrap/Button'
 import EditEntries from "./EditEntries"
+import moment from "moment"
 
 const ListEntries = () =>{
 
@@ -10,6 +11,11 @@ const [entries, setEntries] = useState([]);
 const getList = async () => {
     const res = await fetch("http://localhost:5000/timer");
     let data = await res.json()
+    console.log(data[0])
+    //日本時間で入力→ポスグレ内で記録→呼び出されるときにUTC表記になり一日前になるのを、もう一度ローカル時間表記にする。
+     for (let obj of data){
+     obj.day = moment(obj.day).format()
+    }
     setEntries(data);
     };
 
@@ -31,8 +37,6 @@ const deleteEntry = async (e) =>{
     getList()
 }
 
-
-
 return (
         
 <table className="table">
@@ -49,7 +53,8 @@ return (
    
     {entries.map(entry=>(
     <tr key={entry.id}>
-      <td>{entry.day}</td>
+      <td>{entry.day.substring(0, entry.day.indexOf("T"))}</td>
+      {/* <td>{(new Date(entry.day).substring(0, new Date(entry.day).indexOf("T"))}</td> */}
       <td>{entry.sunrise}</td>
       <td>{entry.description}</td>
       <td><EditEntries entry={entry}/></td>

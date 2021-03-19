@@ -9,6 +9,7 @@ const InputEntries = () => {
   const [description, setDescrtiption] = useState("");
 
   const changeHandler1 = (e) => {
+    
     setDay(e.target.value);
   };
   const changeHandler2 = (e) => {
@@ -33,7 +34,9 @@ const InputEntries = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
+      console.log(response)
+
+      window.location="/"
     } catch (err) {
       console.error(err.message);
     }

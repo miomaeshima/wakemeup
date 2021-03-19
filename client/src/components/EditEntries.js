@@ -8,12 +8,20 @@ import Col from 'react-bootstrap/Col';
 function EditEntries(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [day, setDay]=useState(props.entry.day.substring(0, props.entry.day.indexOf("T")));
+   
   const [sunrise, setSunrise]=useState(props.entry.sunrise);
   const [description, setDescription]=useState(props.entry.description)
-
-  console.log(day.substring(0, day.indexOf("T")))
+  const id = props.entry.id;
+  const handleShow = () => {
+    setDay(props.entry.day.substring(0, props.entry.day.indexOf("T")));   
+    
+    setSunrise(props.entry.sunrise);
+    setDescription(props.entry.description);
+    setShow(true);
+  }
+  
+  
 
   function changeHandler1(e){
     setDay(e.target.value); 
@@ -25,10 +33,33 @@ function EditEntries(props) {
     setDescription(e.target.value);
   }
 
-  function clickHandler(){
-      console.log(day, sunrise, description)
-  }
+  const clickHandler = async (e)=>{
+    e.preventDefault();
+    console.log(day)
+    
+    const body = {
+      day: day,
+      sunrise: sunrise,
+      description:description
+    };
   
+
+    try{
+        const res = await fetch(`http://localhost:5000/timer/${id}`, {
+          method:"PUT",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify(body)
+        });
+       
+        window.location="/"
+        
+
+    } catch (err){
+      console.error(err.message)
+    }
+
+    handleClose();
+  }
 
   
 
@@ -63,7 +94,7 @@ function EditEntries(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={clickHandler}>
+          <Button variant="primary" id={id} onClick={clickHandler}>
             Update
           </Button>
         </Modal.Footer>
