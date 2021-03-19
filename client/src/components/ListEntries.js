@@ -21,7 +21,7 @@ const deleteEntry = async (e) =>{
     e.preventDefault();
     let id = e.target.id;
    try{
-       const res = await fetch(`http://localhost:5000/timer/${id}`, {
+        await fetch(`http://localhost:5000/timer/${id}`, {
         method: "DELETE"
     });
    } catch(err){
