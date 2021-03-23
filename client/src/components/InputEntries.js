@@ -64,4 +64,5 @@ const InputEntries = () => {
   );
 };
 
+
 export default InputEntries;
