@@ -9,7 +9,7 @@ const [entries, setEntries] = useState([]);
 
     
 const getList = async () => {
-    const res = await fetch("http://localhost:5000/timer");
+    const res = await fetch("/timer");
     let data = await res.json()
     console.log(data[0])
     //日本時間で入力→ポスグレ内で記録→呼び出されるときにUTC表記になり一日前になるのを、もう一度ローカル時間表記にする。
@@ -27,7 +27,7 @@ const deleteEntry = async (e) =>{
     e.preventDefault();
     let id = e.target.id;
    try{
-        await fetch(`http://localhost:5000/timer/${id}`, {
+        await fetch(`/timer/${id}`, {
         method: "DELETE"
     });
    } catch(err){

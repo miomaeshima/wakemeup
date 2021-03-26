@@ -2,9 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const pool = require("./db");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "client/build")))
+}
+
 
 app.get("/timer", async(req, res)=>{
     try{
@@ -68,6 +75,6 @@ app.delete("/timer/:id", async(req, res)=>{
     }
 })
 
-app.listen(5000, () => {
-  console.log("Server is starting on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server is starting on port ${PORT}`);
 });

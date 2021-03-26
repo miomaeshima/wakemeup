@@ -45,7 +45,7 @@ function EditEntries(props) {
   
 
     try{
-        const res = await fetch(`http://localhost:5000/timer/${id}`, {
+        const res = await fetch(`/timer/${id}`, {
           method:"PUT",
           headers: {"Content-Type":"application/json"},
           body: JSON.stringify(body)
