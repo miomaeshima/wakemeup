@@ -1,4 +1,4 @@
-CREATE DATABASE wakemeup
+-- CREATE DATABASE wakemeup
 
 CREATE TABLE timer(
     id SERIAL PRIMARY KEY,
