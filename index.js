@@ -75,6 +75,10 @@ app.delete("/timer/:id", async(req, res)=>{
     }
 })
 
+//catch all method
+app.get("*", (req, res)=>{
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
+})
 app.listen(PORT, () => {
   console.log(`Server is starting on port ${PORT}`);
 });

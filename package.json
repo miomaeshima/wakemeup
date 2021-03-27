@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engine":{
+    "node": "12.19.0",
+    "yarn": "1.22.5"
+  },
   "scripts": {
     "server": "nodemon index",
     "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && yarn && yarn build"
   },
   "dependencies": {
     "cors": "^2.8.5",
