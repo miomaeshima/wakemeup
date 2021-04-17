@@ -12,7 +12,6 @@ if (process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "client/build")))
 }
 
-
 app.get("/timer", async(req, res)=>{
     try{
     const allEntries = await pool.query("SELECT * FROM timer");
